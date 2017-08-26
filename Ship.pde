@@ -85,22 +85,22 @@ class Ship {
   // boundary check of the map
   void update(){
     // north
-    if(key == 'w' || key == 'W' || dirFlag == "w"){
+    if(keyInput.get('w') || dirFlag == "w"){
       y-=speed;
       dirFlag = "w";
     }
     //west
-    if(key == 'a' || key == 'A' || dirFlag == "a"){
+    if(keyInput.get('a') || dirFlag == "a"){
       x-=speed;
       dirFlag = "a";
     }
     // south
-    if(key == 's' || key == 'S' || dirFlag == "s"){
+    if(keyInput.get('s') || dirFlag == "s"){
       y+=speed;
       dirFlag = "s";
     }
     // east
-    if(key == 'd' || key == 'D' || dirFlag == "d"){
+    if(keyInput.get('d') || dirFlag == "d"){
       x+=speed;
       dirFlag = "d";
     }  

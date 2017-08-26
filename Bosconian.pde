@@ -10,7 +10,7 @@
  * Bosconian, so I tried to recreate it while also         *
  * adding new features                                     *
  ***********************************************************/
- 
+
 import java.util.Map;
  
 //----------------------------------------------------------
@@ -29,6 +29,7 @@ int oneUp = 0;
 int numLives = 4;
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 ArrayList<SpaceStation> ss = new ArrayList<SpaceStation>();
+HashMap<Character, Boolean> keyInput = new HashMap<Character, Boolean>();
 
 //----------------------------------------------------------
 // Setup function
@@ -36,6 +37,15 @@ ArrayList<SpaceStation> ss = new ArrayList<SpaceStation>();
 void setup(){
   size(1300,1000,P3D);
   frameRate(120);
+  
+  // setup key input
+  keyInput.put('w',false);
+  keyInput.put('a',false);
+  keyInput.put('s',false);
+  keyInput.put('d',false);
+  keyInput.put('o',false);
+  
+  // generate first level
   generate();
 }
 
@@ -58,7 +68,7 @@ void draw() {
   }
   
   // Fire Bullets!!!
-  if(frameCount%10 == 0 /**&& mousePressed){ */ && keyPressed && key== 'o' || key == 'O' ){
+  if(frameCount%10 == 0 && keyInput.get('o')){
     Bullet b = new Bullet("",player.getX(), player.getY());
     bullets.add(b);
   }
@@ -99,6 +109,35 @@ void draw() {
   player.update(); 
   
   //BUG: anything here will be fucked by translation/rotation 
+}
+
+//----------------------------------------------------------
+// Handle Key Input: keeps track of multiple key presses
+//---------------------------------------------------------- 
+void keyPressed(){
+  if(key=='w' || key == 'W')
+    keyInput.put('w',true);
+  if(key=='a' || key == 'A')
+    keyInput.put('a',true);
+  if(key=='s' || key == 'S')
+    keyInput.put('s',true);
+  if(key=='d' || key == 'D')
+    keyInput.put('d',true);
+  if(key=='o' || key == 'O')
+    keyInput.put('o',true);
+}
+
+void keyReleased(){
+  if(key=='w' || key == 'W')
+    keyInput.put('w',false);
+  if(key=='a' || key == 'A')
+    keyInput.put('a',false);
+  if(key=='s' || key == 'S')
+    keyInput.put('s',false);
+  if(key=='d' || key == 'D')
+    keyInput.put('d',false);
+  if(key=='o' || key == 'O')
+    keyInput.put('o',false);
 }
 
 //----------------------------------------------------------
@@ -227,5 +266,6 @@ void generate(){
   player = new Ship(width/2,height/2);
   hud = new HUD(player.x,player.y);
 }  
+
 
 // end
