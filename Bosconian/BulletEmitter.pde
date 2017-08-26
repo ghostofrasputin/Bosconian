@@ -16,7 +16,7 @@ class BulletEmitter {
       float delta_x = player.x - x;
       float delta_y = player.y - y;
       float angle = (float)atan2(delta_y, delta_x);
-      list.add(new Bullet(x, y, 20.0,speed, angle, color(255,0,0)));
+      list.add(new Bullet(x, y, 20.0, speed, angle, color(255,0,0)));
       bulletPause = rate;
     }
   }
@@ -41,7 +41,7 @@ class BulletEmitter {
           angle = 0.0;
           break;
       }
-      println(direction+ " " + angle);
+      //println(direction+ " " + angle);
       list.add(new Bullet(x, y, 10.0, speed, angle, color(255,255,255)));
       bulletPause = rate;
     }

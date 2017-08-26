@@ -29,6 +29,8 @@ int oneUp = 0;
 int numLives = 4;
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 ArrayList<SpaceStation> ss = new ArrayList<SpaceStation>();
+ArrayList<Mine> mines = new ArrayList<Mine>();
+ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
 HashMap<Character, Boolean> keyInput = new HashMap<Character, Boolean>();
 
 //----------------------------------------------------------
@@ -86,6 +88,17 @@ void draw() {
     SpaceStation current = ss.get(i);
     current.display();
     current.update();
+  }
+  
+  // display mines and asteroids
+  for(int i=0; i<mines.size(); i++){
+    Mine m = mines.get(i);
+    m.display();
+    m.update();
+    Asteroid a = asteroids.get(i);
+    a.display();
+    a.update();
+    
   }
   
   // display/update HUD information
@@ -257,6 +270,12 @@ void generate(){
     int y = (int)random(nearY,farY);
     SpaceStation temp = new SpaceStation(Math.random()<.5,x,y);
     ss.add(temp);
+  }
+  for(int i=0; i<400; i++){
+    Mine m = new Mine(random(-3045.0,4345.0),random(-5695.0,6695.0));
+    mines.add(m);
+    Asteroid a = new Asteroid(random(-3045.0,4345.0),random(-5695.0,6695.0));
+    asteroids.add(a);
   }
   player = new Ship(width/2,height/2);
   hud = new HUD(player.x,player.y);
