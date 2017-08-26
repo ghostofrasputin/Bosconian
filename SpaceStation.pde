@@ -1,7 +1,5 @@
 //----------------------------------------------------------
-// SpaceStation class - creates a space station that fires
-// bullets and has panel that opens closes over the station's
-// core
+// SpaceStation class
 //----------------------------------------------------------
 
 class SpaceStation {

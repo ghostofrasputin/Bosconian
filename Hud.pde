@@ -1,17 +1,17 @@
 //----------------------------------------------------------
-// HUD class - head-up display for map, score, lives, etc
+// HUD class
 //----------------------------------------------------------
 
 class HUD {
   // fields
   int condition;
-  private int x,y;
-  private float mapPX,mapPY = 0;
-  private float mappedSpeed = .4;
-  private HashMap<int[],int[]> hm = new HashMap<int[],int[]>();
+  float x,y;
+  float mapPX,mapPY = 0;
+  float mappedSpeed = .4;
+  HashMap<int[],float[]> hm = new HashMap<int[],float[]>();
   
   //constructor
-  HUD(int x, int y) {
+  HUD(float x, float y) {
     this.x = x;
     this.y = y;
     condition = 0;
@@ -22,9 +22,9 @@ class HUD {
       int spaceX = temp.getX();
       int spaceY = temp.getY();
       //if(flag){
-      int xdiff = spaceX - player.getX();
-      int ydiff = spaceY - player.getY();
-      int[] diffArray = {xdiff, ydiff};
+      float xdiff = spaceX - player.x;
+      float ydiff = spaceY - player.y;
+      float[] diffArray = {xdiff, ydiff};
       // they key will be the x/y coords cause it's a unique id
       hm.put(coords,diffArray);
     }    
@@ -91,7 +91,7 @@ class HUD {
        ex = x+1300;
        mapPX = 300-5;
        //map/update real player
-       player.setX(4345);
+       player.x = 4345.0;
        //println(player.getX());
     }
     if(farX <= ex+5){
@@ -99,7 +99,7 @@ class HUD {
        ex = x+1300;
        mapPX = -300+5;
        //map/update real player
-       player.setX(-3045);
+       player.x = -3045.0;
        //println(player.getX());
     }
     if(nearY >= ey-5){
@@ -107,7 +107,7 @@ class HUD {
        ey = y-320;
        mapPY = 500-5;
        //map/update real player
-       player.setY(6695);
+       player.y = 6695.0;
        //println(player.getY());
     }
     if(farY <= ey+5){
@@ -115,7 +115,7 @@ class HUD {
        ex = y-320;
        mapPY = -500+5;
        //map/update real player
-       player.setY(-5695);
+       player.y= -5695.0;
        //println(player.getY());
     }
     ellipse(ex,ey,10,10);
@@ -132,7 +132,7 @@ class HUD {
           }  
         }  
       }  
-      int[] value = (int[])ent.getValue();
+      float[] value = (float[])ent.getValue();
       // draw map representation here:
       if(flag == false){
         fill(0,255,0);
@@ -157,7 +157,7 @@ class HUD {
   void update(){
     x = player.x;
     y = player.y;
-    String hudDir = player.getDir();
+    String hudDir = player.dirFlag;
     switch(hudDir){
       case "w":
         mapPY-=mappedSpeed;

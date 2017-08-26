@@ -1,17 +1,50 @@
 //----------------------------------------------------------
-// Ship class - creates the player's ship
+// Ship class
 //----------------------------------------------------------
 
 class Ship {
-  //fields
-  private int x, y, speed;
-  private String dirFlag;
-  Ship(int x, int y){
+  // fields
+  float x, y, speed;
+  String dirFlag;
+  BulletEmitter emitter;
+  
+  Ship(float x, float y){
     this.x = x;
     this.y = y;
     this.dirFlag = "w";
     this.speed = 5;
+    emitter = new BulletEmitter();
   }
+  
+  void update(){
+    
+    // Fire Bullets!!!
+    if(keyInput.get('o')){
+      emitter.direction_player_is_facing(bullets, new float[]{x,y}, 2*player.speed, 1.0, millis()/100);
+    }
+      
+    // north
+    if(keyInput.get('w') || dirFlag == "w"){
+      y-=speed;
+      dirFlag = "w";
+    }
+    //west
+    if(keyInput.get('a') || dirFlag == "a"){
+      x-=speed;
+      dirFlag = "a";
+    }
+    // south
+    if(keyInput.get('s') || dirFlag == "s"){
+      y+=speed;
+      dirFlag = "s";
+    }
+    // east
+    if(keyInput.get('d') || dirFlag == "d"){
+      x+=speed;
+      dirFlag = "d";
+    }  
+  }
+  
   void display(){
     noStroke();
     rectMode(CENTER);
@@ -39,6 +72,7 @@ class Ship {
         break;
     } 
   }
+  
   // private function that draws ship sprite
   private void shipSprite(){
     fill(255);
@@ -81,46 +115,5 @@ class Ship {
     //left top
     rect(x-22,y-21,5,2.5);
   }  
-  // updates position and performs
-  // boundary check of the map
-  void update(){
-    // north
-    if(keyInput.get('w') || dirFlag == "w"){
-      y-=speed;
-      dirFlag = "w";
-    }
-    //west
-    if(keyInput.get('a') || dirFlag == "a"){
-      x-=speed;
-      dirFlag = "a";
-    }
-    // south
-    if(keyInput.get('s') || dirFlag == "s"){
-      y+=speed;
-      dirFlag = "s";
-    }
-    // east
-    if(keyInput.get('d') || dirFlag == "d"){
-      x+=speed;
-      dirFlag = "d";
-    }  
-  }
   
-  // get direction
-  String getDir(){
-    return dirFlag;
-  }
-  
-  void setX(int num){
-    x = num;
-  }
-  void setY(int num){
-    y = num;
-  }
-  int getX(){
-    return x;
-  }
-  int getY(){
-    return y;
-  }  
 }

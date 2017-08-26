@@ -1,5 +1,5 @@
 //----------------------------------------------------------
-// Asteroid class - creates asteroid obstacles
+// Asteroid class
 //----------------------------------------------------------
 
 class Asteroid {

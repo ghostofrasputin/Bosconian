@@ -67,11 +67,6 @@ void draw() {
     delay(2000);
   }
   
-  // Fire Bullets!!!
-  if(frameCount%10 == 0 && keyInput.get('o')){
-    Bullet b = new Bullet("",player.getX(), player.getY());
-    bullets.add(b);
-  }
   // Animate bullets 
   for(int i=0; i<bullets.size(); i++){
     Bullet b = bullets.get(i);
@@ -100,7 +95,7 @@ void draw() {
   // setup camera:
   // the camera needs to follow the player, but there should be an 
   // offset in the x coords in order to make room for the HUD
-  camera(0.0, 0.0, 1000000000, player.getX()+300, player.y, 0.0, 0.0, 1.0, 0.0);
+  camera(0.0, 0.0, 1000000000, player.x+300, player.y, 0.0, 0.0, 1.0, 0.0);
   ortho(-width, width, -height, height);
   
   // display/update ship
@@ -154,16 +149,16 @@ void collision(Bullet bullet, int bulletNum){
     for(int j=0; j<sections.size();j++){
       Section sTemp = sections.get(j);
       // section circle stuff
-      int secX = sTemp.getX();
-      int secY = sTemp.getY();
-      int secR = sTemp.getS()/2;
+      float secX = sTemp.x;
+      float secY = sTemp.y;
+      float secR = sTemp.size/2;
       // forcefield stuff
       int ffDX = temp.ffData[0];
       int ffDY = temp.ffData[1];
       int ffDR = temp.ffData[2];
       // bullet circle stuff
-      int bulX = bullet.x;
-      int bulY = bullet.y;
+      float bulX = bullet.x;
+      float bulY = bullet.y;
       int bulR = 10;
       
       // collision check bullet and sections:
@@ -199,33 +194,33 @@ void shipCollision(){
       for(int j=0; j<sections.size();j++){
         Section sTemp = sections.get(j);
         // player rect stuff
-        int plyX = player.getX()-29;
-        int plyY = player.getY()-21;
+        float plyX = player.x-29;
+        float plyY = player.y-21;
         int plyW = 65;
         int plyH = 47;
         // section circle stuff
-        int secX = sTemp.getX();
-        int secY = sTemp.getY();
-        int secR = sTemp.getS()/2;
+        float secX = sTemp.x;
+        float secY = sTemp.y;
+        float secR = sTemp.size/2;
         // forcefield stuff
         int ffDX = temp.ffData[0];
         int ffDY = temp.ffData[1];
         int ffDR = temp.ffData[2];
         // collison check sections and player
-        int distX = abs(secX - plyX-plyW/2);
-        int distY = abs(secY - plyY-plyH/2);
-        int dx=distX-plyW/2;
-        int dy=distY-plyH/2;
+        float distX = abs(secX - plyX-plyW/2);
+        float distY = abs(secY - plyY-plyH/2);
+        float dx=distX-plyW/2;
+        float dy=distY-plyH/2;
         if (dx*dx+dy*dy<=(secR*secR)){
           numLives--;
         }
         //collision check forcefield and player
         //only check when forcefield is up
         if(sections.size()>1){
-          int distX2 = abs(ffDX - plyX-plyW/2);
-          int distY2 = abs(ffDY - plyY-plyH/2);
-          int dx2=distX2-plyW/2;
-          int dy2=distY2-plyH/2;
+          float distX2 = abs(ffDX - plyX-plyW/2);
+          float distY2 = abs(ffDY - plyY-plyH/2);
+          float dx2=distX2-plyW/2;
+          float dy2=distY2-plyH/2;
           if (dx2*dx2+dy2*dy2<=(ffDR*ffDR)){  
             numLives--;
           }
@@ -234,13 +229,13 @@ void shipCollision(){
         for(int k=0; k<sTemp.sBullets.size();k++){
           Bullet tempBullet = sTemp.sBullets.get(k);
           // enemy bullet circle stuff
-          int bulX = tempBullet.x;
-          int bulY = tempBullet.y;
+          float bulX = tempBullet.x;
+          float bulY = tempBullet.y;
           int bulR = 10;
-          int distX3 = abs(bulX - plyX-plyW/2);
-          int distY3 = abs(bulY - plyY-plyH/2);
-          int dx3=distX3-plyW/2;
-          int dy3=distY3-plyH/2;
+          float distX3 = abs(bulX - plyX-plyW/2);
+          float distY3 = abs(bulY - plyY-plyH/2);
+          float dx3=distX3-plyW/2;
+          float dy3=distY3-plyH/2;
           if (dx3*dx3+dy3*dy3<=(bulR*bulR)){
             numLives--;
           }

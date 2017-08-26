@@ -1,18 +1,19 @@
 //----------------------------------------------------------
-// Section class - creates a section, a space station
-// needs 6
+// Section class
 //----------------------------------------------------------
 
 class Section {
   // fields
-  private int x,y,size;
+  float x,y,size;
   ArrayList<Bullet> sBullets;
+  BulletEmitter emitter;
   // constructor
   Section(int x, int y){
     this.x = x;
     this.y = y;
     this.size = 100;
     sBullets = new ArrayList<Bullet>();
+    emitter = new BulletEmitter();
   }
   void display(){
     fill(0,255,0);
@@ -20,9 +21,8 @@ class Section {
   }
   void update(){
     // shoot at player within range
-    if(withinShootingRange(x,y) /**&& Math.random() < 0.1*/){
-       Bullet sb = new Bullet("enemy",x, y);
-       sBullets.add(sb);
+    if(withinShootingRange(x,y)){
+       emitter.at_player(sBullets, new float[]{x,y}, 4.0, 2.0, millis()/100);
     }
    for(int i=0; i<sBullets.size(); i++){
       Bullet b = sBullets.get(i);
@@ -39,25 +39,13 @@ class Section {
        //sb.update();  
     // write explosion code
   }
-  int getX(){
-    return x;
-  }
-  int getY(){
-    return y;
-  }
-  int getS(){
-    return size;
-  }
   
   // checks if player is within shooting range of a SS section
-  private boolean withinShootingRange(int x, int y){
-    int range = 600;
-    int xDist = abs(player.getX() - x);
-    int yDist = abs(player.getY() - y);
-    if (xDist < range && yDist < range){
-      return true;
-    }
-    return false;
+  private boolean withinShootingRange(float x, float y){
+    float range = 775.0;
+    float xDist = abs(player.x - x);
+    float yDist = abs(player.y - y);
+    return xDist < range && yDist < range;
   } 
 
 }
