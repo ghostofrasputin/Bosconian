@@ -4,17 +4,19 @@
 
 class SpaceStation {
   // fields
-  private int x,y;
+  float x, y, count;
   ArrayList<Section> sections;
-  private boolean position;
-  private boolean destroyed=false;
-  int[] ffData;
-  // constructor
-  SpaceStation(boolean pos, int x, int y){
+  boolean position;
+  boolean destroyed;
+  float[] ffData;
+  
+  SpaceStation(boolean pos, float x, float y){
     position = pos;
     this.x = x;
     this.y = y;
-    ffData = new int[3];
+    count = 7;
+    destroyed = false;
+    ffData = new float[3];
     ffData[0] = x;
     ffData[1] = y;
     ffData[2] = 100;
@@ -39,7 +41,7 @@ class SpaceStation {
       Section powerCore = new Section(x,y);
       sections.add(powerCore);
     } 
-    // space station with vertical openings:
+    // space station with horizontal openings:
     else{
       int xdist = 100;
       int ydist = 150;
@@ -60,10 +62,10 @@ class SpaceStation {
       sections.add(powerCore);
     }  
   }
-  //draws the inital space station
+  
   void display(){
     // protective ring of power core:
-    if(sections.size() > 1){
+    if(count > 1){
       fill(255,0,0,135);
       ellipse(x, y, 200, 200);
       fill(0);
@@ -75,25 +77,21 @@ class SpaceStation {
       current.display();
     }
   }
+  
   void update(){
     //update hud score if ss is destroyed:
-    if(sections.size()==0 && destroyed==false){
+    if(count==0){
       oneUp+=1000;
       if(oneUp>highscore){
         highscore+=1000;
       }
       destroyed = true;
+      count--;
     }
     for(int i=0; i<sections.size();i++){
       Section current = sections.get(i);
       current.update();
     }
   }
-  // helper functions
-  int getX(){
-    return x;
-  }
-  int getY(){
-    return y;
-  }
+
 }

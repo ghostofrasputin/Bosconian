@@ -7,8 +7,8 @@ class HUD {
   int condition;
   float x,y;
   float mapPX,mapPY = 0;
-  float mappedSpeed = .4;
-  HashMap<int[],float[]> hm = new HashMap<int[],float[]>();
+  float mappedSpeed = (player.speed*0.1)-.1;
+  HashMap<float[],float[]> hm = new HashMap<float[],float[]>();
   
   //constructor
   HUD(float x, float y) {
@@ -18,9 +18,9 @@ class HUD {
     // save this for later
     for(int i=0; i<ss.size();i++){
       SpaceStation temp = ss.get(i);
-      int[] coords = {temp.getX(),temp.getY()};
-      int spaceX = temp.getX();
-      int spaceY = temp.getY();
+      float[] coords = {temp.x,temp.y};
+      float spaceX = temp.x;
+      float spaceY = temp.y;
       //if(flag){
       float xdiff = spaceX - player.x;
       float ydiff = spaceY - player.y;
@@ -122,12 +122,12 @@ class HUD {
     
     // enemy space station locations on map:
     for (Map.Entry ent : hm.entrySet()) {
-      int[] keyCoords = (int[])ent.getKey();
+      float[] keyCoords = (float[])ent.getKey();
       boolean flag = false;
       for(int i=0; i<ss.size(); i++){
         SpaceStation temp = ss.get(i);
-        if(temp.getX() == keyCoords[0] && temp.getY() == keyCoords[1]){
-          if(temp.sections.size() == 0){
+        if(temp.x == keyCoords[0] && temp.y == keyCoords[1]){
+          if(temp.count < 1){
             flag = true;
           }  
         }  

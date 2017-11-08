@@ -12,7 +12,7 @@ class Ship {
     this.x = x;
     this.y = y;
     this.dirFlag = "w";
-    this.speed = 5;
+    this.speed = 10;
     emitter = new BulletEmitter();
   }
   
@@ -20,29 +20,31 @@ class Ship {
     
     // Fire Bullets!!!
     if(keyInput.get('o')){
-      emitter.direction_player_is_facing(bullets, new float[]{x,y}, 2*player.speed, 1.0, millis()/100);
+      emitter.direction_player_is_facing(bullets, new float[]{x,y}, 2.5*player.speed, 1.0, millis()/100);
     }
-      
-    // north
-    if(keyInput.get('w') || dirFlag == "w"){
-      y-=speed;
+    
+    // set direction:
+    if(keyInput.get('w'))
       dirFlag = "w";
-    }
-    //west
-    if(keyInput.get('a') || dirFlag == "a"){
-      x-=speed;
+    if(keyInput.get('a'))
       dirFlag = "a";
-    }
-    // south
-    if(keyInput.get('s') || dirFlag == "s"){
-      y+=speed;
+    if(keyInput.get('s'))
       dirFlag = "s";
-    }
+    if(keyInput.get('d'))
+      dirFlag = "d";  
+    
+    // north
+    if(dirFlag == "w")
+      y-=speed;
+    //west
+    if(dirFlag == "a")
+      x-=speed;
+    // south
+    if(dirFlag == "s")
+      y+=speed;
     // east
-    if(keyInput.get('d') || dirFlag == "d"){
+    if(dirFlag == "d")
       x+=speed;
-      dirFlag = "d";
-    }  
   }
   
   void display(){

@@ -3,12 +3,14 @@
 //----------------------------------------------------------
 
 class Mine {
-  float x,y,size;
+  float x, y, size, rad, side;
   
   Mine(float x, float y){
     this.x = x;
     this.y = y;
-    this.size = 30.0;
+    size = 40.0;
+    rad = size/2;
+    side = 10;
   }
   
   void update(){
@@ -20,7 +22,14 @@ class Mine {
   }
   
   void sprite(){
-    fill(191,126,56);
+    fill(10,100,200);
     ellipse(x,y,size,size);
+    fill(200,0,0);
+    triangle(x,y-size,x-side,y-rad,x+side,y-rad);
+    triangle(x,y+size,x-side,y+rad,x+side,y+rad);
+    
+    triangle(x-size,y,x-rad,y-side,x-rad,y+side);
+    triangle(x+size,y,x+rad,y-side,x+rad,y+side);
+    
   }
 }
