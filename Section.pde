@@ -7,6 +7,7 @@ class Section {
   float x, y, size;
   ArrayList<Bullet> sBullets;
   BulletEmitter emitter;
+  ParticleSystem ps;
   boolean destroyed;
   boolean useless;
   
@@ -16,6 +17,7 @@ class Section {
     this.size = 100;
     sBullets = new ArrayList<Bullet>();
     emitter = new BulletEmitter();
+    ps = new ParticleSystem(x,y,30);
   }
   
   void display(){
@@ -41,11 +43,11 @@ class Section {
       }
     }
     
-    // clear bullets that collided
-    for(int i=0; i< clearList.size(); i++){
-      Bullet b = clearList.get(i);
-      sBullets.remove(b);
-    }
+    // clear out of collided and out-of-range bullets
+    sBullets.removeAll(clearList);
+    
+    // explosion
+    ps.update();
     
   }
   
@@ -67,7 +69,7 @@ class Section {
   }
   
   void destroy(){
-    // explosion code HERE:
+    ps.act();
     x = Float.POSITIVE_INFINITY;
     y = Float.POSITIVE_INFINITY;
   }
