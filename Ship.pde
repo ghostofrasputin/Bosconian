@@ -7,6 +7,7 @@ class Ship {
   float x, y, speed;
   String dirFlag;
   BulletEmitter emitter;
+  ParticleSystem ps;
   
   Ship(float x, float y){
     this.x = x;
@@ -14,14 +15,34 @@ class Ship {
     this.dirFlag = "w";
     this.speed = 10;
     emitter = new BulletEmitter();
+    ps = new ParticleSystem(x,y,30);
   }
   
   void update(){
-    
+    shipCollision();
     // Fire Bullets!!!
     if(keyInput.get('o')){
       emitter.direction_player_is_facing(bullets, new float[]{x,y}, 2.5*player.speed, 1.0, millis()/100);
     }
+    
+    // Animate bullets 
+    ArrayList<Bullet> clearList = new ArrayList<Bullet>();
+    for(int i=0; i<bullets.size(); i++){
+      Bullet b = bullets.get(i);
+      if(b.y > (player.y-len) && b.y < (player.y+len) &&
+         b.x > (player.x-len) && b.x < (player.x+len)){
+           b.display();
+           b.update();
+           if(playerBulletCollision(b)){
+             clearList.add(b);
+           }
+      } else{
+          clearList.add(b);
+      }
+    }
+    
+    // clear bullets that collided
+    bullets.removeAll(clearList);
     
     // set direction:
     if(keyInput.get('w'))
@@ -45,6 +66,8 @@ class Ship {
     // east
     if(dirFlag == "d")
       x+=speed;
+    
+    ps.update();  
   }
   
   void display(){
@@ -76,7 +99,7 @@ class Ship {
   }
   
   // private function that draws ship sprite
-  private void shipSprite(){
+  void shipSprite(){
     fill(255);
     // tall part
     rect(x,y-10,5,45);
@@ -117,5 +140,14 @@ class Ship {
     //left top
     rect(x-22,y-21,5,2.5);
   }  
+  
+  void die(){
+    numLives--;
+    ps.setXY(x,y);
+    ps.act();
+    if(numLives == 0){
+      
+    }
+  }
   
 }

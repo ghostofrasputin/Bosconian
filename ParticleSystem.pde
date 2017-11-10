@@ -4,7 +4,7 @@
 
 class ParticleSystem {
   int num, count;
-  float x, y;
+  float x, y, fade;
   boolean activate;
   ArrayList<Particle> particles;
   
@@ -15,17 +15,19 @@ class ParticleSystem {
     particles = new ArrayList<Particle>();
     count = 0;
     activate = false;
+    fade = random(7,10);
   }
   
   void update(){
-    if(count<num){
-      particles.add(new Particle(x, y, random(30,50), random(7,10)));
-    }
     if(activate) {
-      ArrayList<Particle> clearList = new ArrayList<Particle>();
+      if(count<num){
+        particles.add(new Particle(x, y, random(30,50), fade));
+      }
       if(particles.isEmpty()){
         activate = false;
+        reset();
       } else {
+        ArrayList<Particle> clearList = new ArrayList<Particle>();
         for(int i=0; i<particles.size(); i++){
           Particle p = particles.get(i);
           if(p.isDead()){
@@ -43,4 +45,25 @@ class ParticleSystem {
   void act(){
     activate = true;
   }
+  
+  boolean isActing(){
+    return activate;
+  }
+  
+  void reset(){
+    particles.clear();
+    count = 0;
+  }
+  
+  // for moving game objects
+  void setXY(float newX, float newY){
+    x = newX;
+    y = newY;
+  }
+  
+  void setFade(float f){
+    fade = f;
+  }
+  
+  
 }

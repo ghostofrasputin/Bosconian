@@ -144,7 +144,10 @@ class HUD {
     int distance = 0;
     for(int i=0; i<numLives; i++){
       Ship tempLife = new Ship(x+1050+distance,y+725);
-      tempLife.display();
+      //noStroke();
+      rectMode(CENTER);
+      tempLife.shipSprite();
+      rectMode(CORNER);
       distance+=100;
     }
     

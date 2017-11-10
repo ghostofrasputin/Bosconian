@@ -68,30 +68,6 @@ void draw() {
     delay(2000);
   }
   
-  // Animate bullets 
-  ArrayList<Bullet> clearList = new ArrayList<Bullet>();
-  for(int i=0; i<bullets.size(); i++){
-    Bullet b = bullets.get(i);
-    if(b.y > (player.y-len) && b.y < (player.y+len) &&
-       b.x > (player.x-len) && b.x < (player.x+len)){
-         b.display();
-         b.update();
-         if(collision(b)){
-           clearList.add(b);
-         }
-    } else{
-        // Clean-up bullets that go off screen
-        //bullets.remove(i);
-        clearList.add(b);
-    }
-  }
-  
-  // clear bullets that collided
-  for(int i=0; i< clearList.size(); i++){
-    Bullet b = clearList.get(i);
-    bullets.remove(b);
-  }
-  
   // Display/update space stations:
   for(int i=0; i<ss.size();i++){
     SpaceStation current = ss.get(i);
@@ -103,7 +79,6 @@ void draw() {
   for(int i=0; i<mines.size(); i++){
     Mine m = mines.get(i);
     m.display();
-    m.update();
   }
   
   // display/update HUD information
@@ -117,9 +92,9 @@ void draw() {
   ortho(-width, width, -height, height);
   
   // display/update ship
-  shipCollision();
-  player.display();
   player.update(); 
+  player.display();
+  
   
   //BUG: anything here will be fucked by translation/rotation 
 }

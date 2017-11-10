@@ -28,7 +28,7 @@ class Section {
   void update(){
     // shoot at player within range
     if(withinShootingRange()){
-       emitter.at_player(sBullets, new float[]{x,y}, 4.0, 2.0, millis()/100);
+       emitter.at_player(sBullets, new float[]{x,y}, 12.0, 10.0, millis()/100);
     }
    
    // animate bullets
@@ -70,8 +70,8 @@ class Section {
   
   void destroy(){
     ps.act();
-    x = Float.POSITIVE_INFINITY;
-    y = Float.POSITIVE_INFINITY;
+    x = 10000.0;
+    y = 10000.0;
   }
 
 }
