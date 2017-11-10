@@ -64,6 +64,8 @@ class SpaceStation {
   }
   
   void display(){
+    
+    
     // protective ring of power core:
     if(count > 1){
       fill(255,0,0,135);
@@ -76,6 +78,9 @@ class SpaceStation {
       Section current = sections.get(i);
       current.display();
     }
+    // Debug: bounding circle
+    //fill(255,0,0,100);
+    //ellipse(x,y,600,600);
   }
   
   void update(){

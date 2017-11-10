@@ -55,7 +55,6 @@ void setup(){
 //----------------------------------------------------------
 void draw() {
   background(0);
-
   if(numDestroyed==numStations){
     numDestroyed = 0;
     level++;
@@ -146,10 +145,12 @@ void generate(){
     SpaceStation temp = new SpaceStation(Math.random()<.5,x,y);
     ss.add(temp);
   }
-  for(int i=0; i<400; i++){
-    Mine m = new Mine(random(-3045.0,4345.0),random(-5695.0,6695.0));
-    mines.add(m);
-  }
   player = new Ship(width/2,height/2);
   hud = new HUD(player.x,player.y);
+  for(int i=0; i<400; i++){
+    Mine m = new Mine(random(-3045.0,4345.0),random(-5695.0,6695.0));
+    if(!mineCollision(m)){
+      mines.add(m);
+    }
+  }
 }  

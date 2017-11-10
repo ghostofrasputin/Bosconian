@@ -72,7 +72,7 @@ void shipCollision(){
     float plyY = player.y-21;
     int plyW = 65;
     int plyH = 47;
-    
+   
     // DEBUG: bounding box:
     //rect(plyX,plyY,plyW,plyH);
     
@@ -141,9 +141,61 @@ void shipCollision(){
      if (dx*dx+dy*dy<=(mRad*mRad)){
        m.explode();
        player.die();
-       //mines.remove(i);
        break;
      }
    }
    
-} 
+}
+
+// makes sure mines dont spawn on
+// player or space stations
+boolean mineCollision(Mine m){
+  // player bounding area so no
+  // mines kill player on start
+  float pX = player.x-300;
+  float pY = player.y-300;
+  int pW = 600;
+  int pH = 600;
+  // mine stuff
+  float mX = m.x;
+  float mY = m.y;
+  int mRad = 40; // bounding circle is 70 diameter
+  float distX = abs(mX - pX-(pW/2));
+  float distY = abs(mY - pY-(pH/2));
+  float dx = distX-(pW/2);
+  float dy = distY-(pH/2);
+  
+  if (distX <= (pW/2)) { 
+    return true; 
+  } 
+  if (distY <= (pH/2)) { 
+    return true; 
+  }
+  // player mine collision:
+  if (dx*dx+dy*dy<=(mRad*mRad)){
+    return true;
+  }
+  
+  // space station mine collision:
+  for(int i=0; i<ss.size(); i++){
+    SpaceStation s = ss.get(i);
+    float sX = s.x;
+    float sY = s.y;
+    float sRad = 300;
+    if(((sX-mX)*(sX-mX) + (sY-mY)*(sY-mY)) <= ((sRad+mRad)*(sRad+mRad))){
+      return true;
+    }
+  }
+  
+  // existing mines collision:
+  for(int i=0; i<mines.size(); i++){
+    Mine m2 = mines.get(i);
+    float mX2 = m2.x;
+    float mY2 = m2.y;
+    if(((mX2-mX)*(mX2-mX) + (mY2-mY)*(mY2-mY)) <= ((mRad+mRad)*(mRad+mRad))){
+      return true;
+    }
+  }
+  
+  return false;
+}
