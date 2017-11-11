@@ -30,6 +30,7 @@ int numLives = 4;
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 ArrayList<SpaceStation> ss = new ArrayList<SpaceStation>();
 ArrayList<Mine> mines = new ArrayList<Mine>();
+ArrayList<PVector> stars = new ArrayList<PVector>();
 HashMap<Character, Boolean> keyInput = new HashMap<Character, Boolean>();
 
 //----------------------------------------------------------
@@ -55,6 +56,8 @@ void setup(){
 //----------------------------------------------------------
 void draw() {
   background(0);
+  drawStars();
+  
   if(numDestroyed==numStations){
     numDestroyed = 0;
     level++;
@@ -128,7 +131,7 @@ void keyReleased(){
 }
 
 //----------------------------------------------------------
-// HELPER FUNCTIONS
+// Level Generation Functions
 //----------------------------------------------------------
 
 // creates procedurally generated levels
@@ -153,4 +156,16 @@ void generate(){
       mines.add(m);
     }
   }
-}  
+  for(int i=0; i<1000; i++){
+    stars.add(new PVector(random(-3045.0,4345.0),random(-5695.0,6695.0)));
+  }
+}
+
+void drawStars(){
+  fill(255);
+  float size = 3.0;
+  for(int i=0; i< stars.size(); i++){
+    PVector p = stars.get(i);
+    ellipse(p.x,p.y,size,size);
+  }
+}

@@ -58,6 +58,7 @@ boolean playerBulletCollision(Bullet bullet){
      int mRad = 35; // bounding circle is 70 diameter
      if(((bulX-mX)*(bulX-mX) + (bulY-mY)*(bulY-mY)) <= ((bulR+mRad)*(bulR+mRad))){
        m.explode(); 
+       highscore += 20;
        return true;
       }
   }
