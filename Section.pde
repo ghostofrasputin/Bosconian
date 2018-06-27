@@ -69,6 +69,7 @@ class Section {
   }
   
   void destroy(){
+    sfx.get("section").play(1.0,0.0,0.5);
     ps.act();
     x = 10000.0;
     y = 10000.0;

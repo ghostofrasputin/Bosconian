@@ -9,6 +9,7 @@
  ***********************************************************/
 
 import java.util.Map;
+import processing.sound.*;
  
 //----------------------------------------------------------
 // Global variables
@@ -30,7 +31,7 @@ ArrayList<Formation> forms = new ArrayList<Formation>();
 ArrayList<Mine> mines = new ArrayList<Mine>();
 ArrayList<PVector> stars = new ArrayList<PVector>();
 HashMap<Character, Boolean> keyInput = new HashMap<Character, Boolean>();
-
+HashMap<String, SoundFile> sfx = new HashMap<String, SoundFile>();
 Formation f = new Formation("squadron", width/2, height/2);
 
 
@@ -48,6 +49,15 @@ void setup(){
   keyInput.put('d',false);
   keyInput.put('o',false);
   
+  // music/sfx library
+  sfx.put("shoot", new SoundFile(this, "sfx/shoot.wav"));
+  sfx.put("background", new SoundFile(this, "sfx/background.wav"));
+  sfx.put("mine", new SoundFile(this, "sfx/mine.wav"));
+  sfx.put("section", new SoundFile(this, "sfx/section.wav"));
+  sfx.get("background").play();
+  sfx.get("background").stop();
+  sfx.get("background").loop(1.0,0.0,0.5);
+  
   // generate first level
   generate();
   
@@ -57,6 +67,7 @@ void setup(){
 // Draw function
 //----------------------------------------------------------
 void draw() {
+  
   background(0);
   drawStars();
   

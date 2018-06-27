@@ -23,6 +23,7 @@ class BulletEmitter {
   
   void direction_player_is_facing(ArrayList<Bullet> list, float[] loc, float speed, float frequency, float rate){
     if (rate > bulletPause+frequency){
+      sfx.get("shoot").play(1.0,0.0,0.18);
       String direction = player.dirFlag;
       float x = loc[0];
       float y = loc[1];

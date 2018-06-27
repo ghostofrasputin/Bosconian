@@ -57,6 +57,7 @@ boolean playerBulletCollision(Bullet bullet){
      float mY = m.y;
      int mRad = 35; // bounding circle is 70 diameter
      if(((bulX-mX)*(bulX-mX) + (bulY-mY)*(bulY-mY)) <= ((bulR+mRad)*(bulR+mRad))){
+       sfx.get("mine").play(1.0,0.0,0.5);
        m.explode(); 
        highscore += 20;
        return true;
@@ -140,6 +141,7 @@ void shipCollision(){
      float dx = distX-plyW/2;
      float dy = distY-plyH/2;
      if (dx*dx+dy*dy<=(mRad*mRad)){
+       sfx.get("mine").play(1.0,0.0,0.5);
        m.explode();
        player.die();
        break;
