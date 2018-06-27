@@ -73,6 +73,7 @@ class Ship {
   void display(){
     noStroke();
     rectMode(CENTER);
+    pushMatrix();
     switch(dirFlag){
       case "w":
         shipSprite();
@@ -95,7 +96,9 @@ class Ship {
         translate(-x,-y);
         shipSprite();
         break;
-    } 
+    }
+    popMatrix();
+    rectMode(CORNER);
   }
   
   // private function that draws ship sprite

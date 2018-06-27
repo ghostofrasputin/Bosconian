@@ -6,9 +6,6 @@
  * move using WASD                                         *
  * shoot by pressing the O button                          * 
  *                                                         *
- * Description: I really like playing the arcade game,     *
- * Bosconian, so I tried to recreate it while also         *
- * adding new features                                     *
  ***********************************************************/
 
 import java.util.Map;
@@ -29,9 +26,13 @@ int oneUp = 0;
 int numLives = 4;
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 ArrayList<SpaceStation> ss = new ArrayList<SpaceStation>();
+ArrayList<Formation> forms = new ArrayList<Formation>();
 ArrayList<Mine> mines = new ArrayList<Mine>();
 ArrayList<PVector> stars = new ArrayList<PVector>();
 HashMap<Character, Boolean> keyInput = new HashMap<Character, Boolean>();
+
+Formation f = new Formation("squadron", width/2, height/2);
+
 
 //----------------------------------------------------------
 // Setup function
@@ -39,7 +40,7 @@ HashMap<Character, Boolean> keyInput = new HashMap<Character, Boolean>();
 void setup(){
   size(1300,1000,P3D);
   frameRate(60);
-  
+  forms.add(f);
   // setup key input
   keyInput.put('w',false);
   keyInput.put('a',false);
@@ -49,6 +50,7 @@ void setup(){
   
   // generate first level
   generate();
+  
 }
 
 //----------------------------------------------------------
@@ -83,6 +85,12 @@ void draw() {
     m.display();
   }
   
+  for(int i=0; i<forms.size(); i++){
+    Formation f = forms.get(i);
+    f.display();
+    f.update();
+  }
+  
   // display/update HUD information
   hud.display();
   hud.update();
@@ -97,8 +105,6 @@ void draw() {
   player.update(); 
   player.display();
   
-  
-  //BUG: anything here will be fucked by translation/rotation 
 }
 
 //----------------------------------------------------------
