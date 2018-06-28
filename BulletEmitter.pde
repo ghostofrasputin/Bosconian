@@ -48,4 +48,31 @@ class BulletEmitter {
     }
   }
   
+  void bomb_behind(ArrayList<Bullet> list, float[] loc, float speed, float frequency, float rate){
+    if (rate > bulletPause+frequency){
+      //sfx.get("shoot").play(1.0,0.0,0.18);
+      String direction = player.dirFlag;
+      float x = loc[0];
+      float y = loc[1];
+      float angle = 0.0;
+      switch(direction){
+        case "w":
+          angle = PI/2.0;
+          break;
+        case "a":
+          angle = 0.0;
+          break;
+        case "s":
+          angle = 3.0*PI/2.0;
+          break;
+        case "d":
+          angle = PI;
+          break;
+      }
+      list.add(new Bullet(x, y, 30.0, speed, angle, color(0,255,0)));
+      bulletPause = rate;
+    }
+  }
+  
+  
 }

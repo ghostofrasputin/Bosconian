@@ -48,6 +48,7 @@ void setup(){
   keyInput.put('s',false);
   keyInput.put('d',false);
   keyInput.put('o',false);
+  keyInput.put('p',false);
   
   // music/sfx library
   sfx.put("shoot", new SoundFile(this, "sfx/shoot.wav"));
@@ -132,6 +133,8 @@ void keyPressed(){
     keyInput.put('d',true);
   if(key=='o' || key == 'O')
     keyInput.put('o',true);
+  if(key=='p' || key == 'P')
+    keyInput.put('p',true); 
 }
 
 void keyReleased(){
@@ -145,6 +148,8 @@ void keyReleased(){
     keyInput.put('d',false);
   if(key=='o' || key == 'O')
     keyInput.put('o',false);
+  if(key=='p' || key == 'P')
+    keyInput.put('p',false);  
 }
 
 //----------------------------------------------------------

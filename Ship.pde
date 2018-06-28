@@ -20,9 +20,15 @@ class Ship {
   
   void update(){
     shipCollision();
+    
     // Fire Bullets!!!
     if(keyInput.get('o')){
       emitter.direction_player_is_facing(bullets, new float[]{x,y}, 2.5*player.speed, 1.0, millis()/100);
+    }
+    
+    // Drop Bombs
+    if(keyInput.get('p')){
+      emitter.bomb_behind(bullets, new float[]{x,y}, 1.2*player.speed, 1.0, millis()/100);
     }
     
     // Animate bullets 
