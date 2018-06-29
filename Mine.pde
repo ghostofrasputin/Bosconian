@@ -13,7 +13,7 @@ class Mine {
     size = 40.0;
     rad = size/2;
     side = 10;
-    ps = new ParticleSystem(x,y,10);
+    ps = new ParticleSystem(x,y,10,new color[]{color(255,255,0),color(255,100,0),color(255,200,0)});
     isDead = false;
   }
   

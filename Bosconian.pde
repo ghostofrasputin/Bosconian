@@ -26,6 +26,7 @@ int highscore = 0;
 int oneUp = 0;
 int numLives = 4;
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 ArrayList<SpaceStation> ss = new ArrayList<SpaceStation>();
 ArrayList<Formation> forms = new ArrayList<Formation>();
 ArrayList<Mine> mines = new ArrayList<Mine>();
@@ -55,6 +56,7 @@ void setup(){
   sfx.put("background", new SoundFile(this, "sfx/background.wav"));
   sfx.put("mine", new SoundFile(this, "sfx/mine.wav"));
   sfx.put("section", new SoundFile(this, "sfx/section.wav"));
+  sfx.put("bomb", new SoundFile(this, "sfx/bomb.wav"));
   sfx.get("background").play();
   sfx.get("background").stop();
   sfx.get("background").loop(1.0,0.0,0.5);

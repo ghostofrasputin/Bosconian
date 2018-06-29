@@ -15,7 +15,7 @@ class Ship {
     this.dirFlag = "w";
     this.speed = 10;
     emitter = new BulletEmitter();
-    ps = new ParticleSystem(x,y,30);
+    ps = new ParticleSystem(x,y,30,new color[]{color(255,255,0),color(255,100,0),color(255,200,0)});
   }
   
   void update(){
@@ -28,7 +28,7 @@ class Ship {
     
     // Drop Bombs
     if(keyInput.get('p')){
-      emitter.bomb_behind(bullets, new float[]{x,y}, 1.2*player.speed, 1.0, millis()/100);
+      emitter.bomb_behind(bombs, new float[]{x,y}, 1.2*player.speed, 1.0, millis()/100);
     }
     
     // Animate bullets 
@@ -44,6 +44,21 @@ class Ship {
            }
       } else{
           clearList.add(b);
+      }
+    }
+    
+    // Animate Bombs
+    // Animate bullets 
+    ArrayList<Bomb> clearList2 = new ArrayList<Bomb>();
+    for(int i=0; i<bombs.size(); i++){
+      Bomb b = bombs.get(i);
+      if(b.y > (player.y-len) && b.y < (player.y+len) &&
+         b.x > (player.x-len) && b.x < (player.x+len)){
+           b.display();
+           b.update();
+           // note: no collision yet
+      } else{
+          clearList2.add(b);
       }
     }
     

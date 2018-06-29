@@ -17,7 +17,7 @@ class Section {
     this.size = 100;
     sBullets = new ArrayList<Bullet>();
     emitter = new BulletEmitter();
-    ps = new ParticleSystem(x,y,30);
+    ps = new ParticleSystem(x,y,30, new color[]{color(255,255,0),color(255,100,0),color(255,200,0)});
   }
   
   void display(){
@@ -28,7 +28,7 @@ class Section {
   void update(){
     // shoot at player within range
     if(withinShootingRange()){
-       emitter.at_player(sBullets, new float[]{x,y}, 12.0, 10.0, millis()/100);
+       emitter.at_player(sBullets, new float[]{x,y}, 12.0, 5.0, millis()/100);
     }
    
    // animate bullets

@@ -3,16 +3,20 @@
 //----------------------------------------------------------
 
 class ParticleSystem {
-  int num, count;
+  int num, count, xr, yr;
   float x, y, fade;
+  color[] colors;
   boolean activate;
   ArrayList<Particle> particles;
   
-  ParticleSystem(float x, float y, int num){
+  ParticleSystem(float x, float y, int num, color[] colors){
     this.x = x;
     this.y = y;
     this.num = num;
+    this.colors = colors;
     particles = new ArrayList<Particle>();
+    xr = 0;
+    yr = 0;
     count = 0;
     activate = false;
     fade = random(7,10);
@@ -21,7 +25,7 @@ class ParticleSystem {
   void update(){
     if(activate) {
       if(count<num){
-        particles.add(new Particle(x, y, random(30,50), fade));
+        particles.add(new Particle(random(x-xr,x+xr), random(y-yr,y+yr), random(30,50), fade, colors));
       }
       if(particles.isEmpty()){
         activate = false;
@@ -59,6 +63,11 @@ class ParticleSystem {
   void setXY(float newX, float newY){
     x = newX;
     y = newY;
+  }
+  
+  void setRange(int xRange, int yRange){
+    xr = xRange;
+    yr = yRange;
   }
   
   void setFade(float f){

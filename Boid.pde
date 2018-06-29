@@ -17,7 +17,7 @@ class Boid {
       // Eich Missiles
       case "I-Type":
         r = 13.0;
-        speed = 10;
+        speed = 7;
         force = 0.03;
         break;
       // Ploor Missiles

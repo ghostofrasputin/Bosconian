@@ -9,7 +9,7 @@ class Particle {
   color c;
   PVector pos, vel;
   
-  Particle(float x, float y, float size, float fade){
+  Particle(float x, float y, float size, float fade, color[] colors){
     this.x = x;
     this.y = y;
     this.size = size; 
@@ -17,10 +17,6 @@ class Particle {
     lifeSpan = 255.0;
     pos =  new PVector(x, y);
     vel = new PVector(random(-2.2, 2.2), random(-2.2, 2.2));
-    color yellow = color(255,255,0);
-    color orange = color(255,100,0);
-    color mix = color(255,200,0);
-    color[] colors = {orange,yellow,mix};
     Random generator = new Random();
     int randomIndex = generator.nextInt(colors.length);
     c = colors[randomIndex];
