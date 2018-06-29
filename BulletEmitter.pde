@@ -54,22 +54,31 @@ class BulletEmitter {
       String direction = player.dirFlag;
       float x = loc[0];
       float y = loc[1];
-      float angle = 0.0;
       switch(direction){
         case "w":
-          angle = PI/2.0;
+          list.add(new Bomb(x, y, 30.0, speed, PI/2, color(0,255,0), true));
+          list.add(new Bomb(x, y, 30.0, speed, 0.0, color(0,255,0), false));
+          list.add(new Bomb(x, y, 30.0, speed, PI, color(0,255,0), false));
+          print("fuck");
           break;
         case "a":
-          angle = 0.0;
+          list.add(new Bomb(x, y, 30.0, speed, 0.0, color(0,255,0), true));
+          list.add(new Bomb(x, y, 30.0, speed, PI/2, color(0,255,0), false));
+          list.add(new Bomb(x, y, 30.0, speed, 3.0*PI/2.0, color(0,255,0), false));
           break;
         case "s":
-          angle = 3.0*PI/2.0;
+          list.add(new Bomb(x, y, 30.0, speed, 3.0*PI/2.0, color(0,255,0), true));
+          list.add(new Bomb(x, y, 30.0, speed, PI, color(0,255,0), false));
+          list.add(new Bomb(x, y, 30.0, speed, 0.0, color(0,255,0), false));
           break;
         case "d":
-          angle = PI;
+          list.add(new Bomb(x, y, 30.0, speed, PI, color(0,255,0), true));
+          list.add(new Bomb(x, y, 30.0, speed, PI/2, color(0,255,0), false));
+          list.add(new Bomb(x, y, 30.0, speed, 3.0*PI/2.0, color(0,255,0), false));
           break;
       }
-      list.add(new Bomb(x, y, 30.0, speed, angle, color(0,255,0)));
+      
+      
       bulletPause = rate;
     }
   }
