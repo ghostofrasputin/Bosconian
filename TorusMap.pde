@@ -1,31 +1,56 @@
 //----------------------------------------------------------
-// Torus class
+// TorusMap class
 //   the seamless wrapping world is toroidal and the Torus
 //   class is used to manage 9 zones of the game to 
 //   establish the effect.
 //----------------------------------------------------------
 
 
-class Torus {
-  /*Zone A = new Zone();
-  Zone B = new Zone();
-  Zone C = new Zone();
-  Zone D = new Zone();
-  Zone E = new Zone(); // golden
-  Zone F = new Zone();
-  Zone G = new Zone();
-  Zone H = new Zone();
-  Zone I = new Zone();*/
-  ArrayList<Zone> zones = new ArrayList<Zone>();
-  Torus(){
+class TorusMap {
   
+  ArrayList<Zone> zones;
+  
+  TorusMap(){
+    float xMin = -3045;
+    float xMax =  4345;
+    float yMin = -5695;
+    float yMax =  6695;
+    float off = 500;
+    float xRange = abs(xMin)+xMax;
+    float yRange = abs(yMin)+yMax;
+    zones = new ArrayList<Zone>();
+    Zone A = new Zone(xMax-off, yMax-off, xMin-off, yMin-off, off, off);
+    zones.add(A);
+    Zone B = new Zone(xMin, yMax-off, xMin, yMin-off, xRange, off);
+    zones.add(B);
+    Zone C = new Zone(xMin, yMax-off, xMax, yMin-off, off, off);
+    zones.add(C);
+    Zone D = new Zone(xMax-off, yMin, xMin-off, yMin, off, yRange);
+    zones.add(D);
+    Zone E = new Zone(xMin+off, yMin+off, xRange-(2*off), yRange-(2*off));
+    zones.add(E);
+    Zone F = new Zone(xMin, yMin, xMax, yMin, off, yRange);
+    zones.add(F);
+    Zone G = new Zone(xMax-off, yMin, xMin-off, yMax, off, off);
+    zones.add(G);
+    Zone H = new Zone(xMin, yMin, xMin, yMax, xRange, off);
+    zones.add(H);
+    Zone I = new Zone(xMin, yMin, xMax, yMax, off, off);
+    zones.add(I);
   }
   
   // generates the objects on the 
   // the world map and assigns those
   // objects to a zone
   void generateMap(){
+    
+  }
   
+  void assignZone(Zone zone){
+    for(int i=0; i<zones.size(); i++){
+      //Zone current = zones.get(i);
+      
+    }
   }
   
   void update(){
@@ -89,15 +114,23 @@ class Zone {
   ArrayList<Bullet> bullets = new ArrayList<Bullet>();
   ArrayList<Formation> forms = new ArrayList<Formation>();
   
-  Zone(float x, float y, float w, float h, float x_offset, float y_offset, float mw, float mh){
+  // golden zone doesn't need mirror effect
+  Zone(float x, float y, float w, float h){
     real_bounds[0] = x;
     real_bounds[1] = y;
     real_bounds[2] = w;
     real_bounds[3] = h;
-    mirr_bounds[0] = x + x_offset;
-    mirr_bounds[1] = y + y_offset;
-    mirr_bounds[2] = mw;
-    mirr_bounds[3] = mh;
+  }
+  
+  Zone(float x, float y, float mx, float my, float w, float h){
+    real_bounds[0] = x;
+    real_bounds[1] = y;
+    real_bounds[2] = w;
+    real_bounds[3] = h;
+    mirr_bounds[0] = mx;
+    mirr_bounds[1] = my;
+    mirr_bounds[2] = w;
+    mirr_bounds[3] = h;
   }
   
   void update(){
